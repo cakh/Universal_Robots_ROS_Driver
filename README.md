@@ -122,27 +122,35 @@ explained in the [next section](#alternative-all-source-build).
 
 ```bash
 # source global ros
-$ source /opt/ros/<your_ros_version>/setup.bash
+ source /opt/ros/melodic/setup.bash
 
 # create a catkin workspace
-$ mkdir -p catkin_ws/src && cd catkin_ws
+ mkdir -p catkin_ws/src && cd catkin_ws
 
 # clone the driver
-$ git clone https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git src/Universal_Robots_ROS_Driver
+ git clone https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git src/Universal_Robots_ROS_Driver
 
 # clone the description. Currently, it is necessary to use the melodic-devel-staging branch.
-$ git clone -b melodic-devel-staging https://github.com/ros-industrial/universal_robot.git src/universal_robot
+ git clone -b melodic-devel-staging https://github.com/ros-industrial/universal_robot.git src/universal_robot
 
 # install dependencies
-$ sudo apt update -qq
-$ rosdep update
-$ rosdep install --from-paths src --ignore-src -y
+ sudo apt update -qq
+ rosdep update
+ rosdep install --from-paths src --ignore-src -y
 
 # build the workspace
-$ catkin_make
+ catkin_make
 
 # activate the workspace (ie: source it)
-$ source devel/setup.bash
+ source devel/setup.bash
+ 
+ roslaunch ur_calibration calibration_correction.launch robot_ip:=192.168.0.100 target_filename:="${HOME}/my_robot_calibration.yaml" 
+ 
+ roslaunch ur_robot_driver ur5_bringup.launch robot_ip:=192.168.0.100 [reverse_port:=REVERSE_PORT] kinematics_config:=${HOME}/my_robot_calibration.yaml
+ 
+ roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch limited:=true
+ 
+ roslaunch ur5_moveit_config moveit_rviz.launch config:=true
 ```
 
 ### Alternative: All-source build
