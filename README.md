@@ -128,10 +128,10 @@ explained in the [next section](#alternative-all-source-build).
  mkdir -p catkin_ws/src && cd catkin_ws
 
 # clone the driver
- git clone https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git src/Universal_Robots_ROS_Driver
+ git clone https://github.com/cakh/Universal_Robots_ROS_Driver.git src/Universal_Robots_ROS_Driver
 
 # clone the description. Currently, it is necessary to use the melodic-devel-staging branch.
- git clone -b melodic-devel-staging https://github.com/ros-industrial/universal_robot.git src/universal_robot
+ git clone -b melodic-devel-staging https://github.com/cakh/universal_robot.git src/universal_robot
 
 # install dependencies
  sudo apt update -qq
